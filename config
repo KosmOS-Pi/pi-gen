@@ -1,6 +1,6 @@
-IMG_NAME=kosmos-bookworm-arm64
+IMG_NAME=kosmos-trixie-arm64
 PI_GEN_RELEASE=KosmOS
-RELEASE=bookworm
+RELEASE=trixie
 DEPLOY_COMPRESSION=xz
 TARGET_HOSTNAME=kosmos
 FIRST_USER_NAME=kosmonaut
