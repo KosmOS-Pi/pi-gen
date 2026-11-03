@@ -1,5 +1,5 @@
 Types: deb
-URIs: https://deb.kosmos-pi.org/trixie-test/
+URIs: https://deb.kosmos-pi.org/trixie/
 Suites: trixie trixie-old
 Components: main
 Architectures: arm64
