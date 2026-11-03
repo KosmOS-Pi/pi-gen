@@ -33,9 +33,9 @@ install -m 755 -d                               "${ROOTFS_DIR}/usr/share/keyring
 install -m 755 -d                               "${ROOTFS_DIR}/etc/apt/sources.list.d/"
 
 install -m 644 files/kosmos-bootstrap.pgp       "${ROOTFS_DIR}/usr/share/keyrings/"
-install -m 644 files/kosmos-bootstrap.source    "${ROOTFS_DIR}/etc/apt/sources.list.d/"
+install -m 644 files/kosmos-bootstrap.sources    "${ROOTFS_DIR}/etc/apt/sources.list.d/"
 
 chroot "${ROOTFS_DIR}" /bin/bash -c 'apt update && apt install -y kosmos-archive-keyring kosmos-apt-config'
 
 rm "${ROOTFS_DIR}/usr/share/keyrings/kosmos-bootstrap.pgp"
-rm "${ROOTFS_DIR}/etc/apt/sources.list.d/kosmos-bootstrap.source"
+rm "${ROOTFS_DIR}/etc/apt/sources.list.d/kosmos-bootstrap.sources"
