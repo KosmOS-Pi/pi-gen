@@ -27,3 +27,15 @@ install -m 755 files/check-kosmos-setup         "${ROOTFS_DIR}/usr/local/bin/"
 
 # script to notify setup status to user at login
 install -m 755 files/kosmos-setup-status.sh     "${ROOTFS_DIR}/etc/profile.d"
+
+# Install repository config and keys
+install -m 755 -d                               "${ROOTFS_DIR}/usr/share/keyrings/"
+install -m 755 -d                               "${ROOTFS_DIR}/etc/apt/sources.list.d/"
+
+install -m 644 files/kosmos-bootstrap.pgp       "${ROOTFS_DIR}/usr/share/keyrings/"
+install -m 644 files/kosmos-bootstrap.source    "${ROOTFS_DIR}/etc/apt/sources.list.d/"
+
+chroot "${ROOTFS_DIR}" /bin/bash -c 'apt update && apt install -y kosmos-archive-keyring kosmos-apt-config'
+
+rm "${ROOTFS_DIR}/usr/share/keyrings/kosmos-bootstrap.pgp"
+rm "${ROOTFS_DIR}/etc/apt/sources.list.d/kosmos-bootstrap.source"

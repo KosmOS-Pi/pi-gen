@@ -6,19 +6,6 @@ FLAG_DIR=/var/lib/kosmos-setup
 IN_PROG_FILE="$FLAG_DIR/in-progress"
 DONE_FILE="$FLAG_DIR/done"
 
-echo "Adding KosmOS repositories."
-
-# Add KosmOS repository and key
-install -m 755 -d /etc/apt/sources.list.d/
-install -m 755 -d /etc/apt/keyrings/
-
-cat > /etc/apt/sources.list.d/kosmos.list << EOF
-deb [signed-by=/etc/apt/keyrings/kosmos.gpg.asc] https://deb.kosmos-pi.org/bookworm/ bookworm main
-deb [signed-by=/etc/apt/keyrings/kosmos.gpg.asc] https://deb.kosmos-pi.org/bookworm/ bookworm-old main
-EOF
-
-wget -O /etc/apt/keyrings/kosmos.gpg.asc https://deb.kosmos-pi.org/keys/kosmos.gpg.asc
-
 echo "Installing packages..."
 # Update repositories, upgrade and install packages
 apt-get update
@@ -27,7 +14,7 @@ apt-get -y upgrade
 DEBIAN_FRONTEND=noninteractive apt-get -yq \
   -o Dpkg::Options::="--force-confdef" \
   -o Dpkg::Options::="--force-confold" \
-  install xserver-xorg kde-standard realvnc-vnc-server astrophotography-all chromium kosmos-mods
+  install kosmos-desktop kosmos-mods # astrophotography-all # temporarily disabled
 
 echo "Last tweaks..."
 
