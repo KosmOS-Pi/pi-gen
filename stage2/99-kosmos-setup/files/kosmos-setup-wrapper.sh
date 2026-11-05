@@ -25,6 +25,19 @@ check_network() {
 
 	if wget -q -O - http://deb.debian.org > /dev/null; then
 		log "Internet connectivity confirmed."
+
+		# Wait for clock sync (no RTC on Pi): signatures are rejected as "Not live yet" otherwise
+		# Never blocks: after 60s it proceeds anyway.
+		synced=no
+		for i in $(seq 1 30); do
+			if [ "$(timedatectl show -p NTPSynchronized --value)" = "yes" ]; then
+				synced=yes
+				break;
+			fi
+			sleep 2
+		done
+		log "Clock synchronized: $synced"
+
 		return 0
 	else
 		log "No internet connectivity detected."
