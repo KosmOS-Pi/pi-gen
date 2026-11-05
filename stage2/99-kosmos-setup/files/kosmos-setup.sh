@@ -14,7 +14,7 @@ apt-get -y upgrade
 DEBIAN_FRONTEND=noninteractive apt-get -yq \
   -o Dpkg::Options::="--force-confdef" \
   -o Dpkg::Options::="--force-confold" \
-  install kosmos-desktop kosmos-mods # astrophotography-all # temporarily disabled
+  install kosmos-desktop kosmos-mods kosmos-astrophotography
 
 echo "Last tweaks..."
 
