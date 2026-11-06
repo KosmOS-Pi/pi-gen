@@ -2,5 +2,5 @@
 
 # Prepare user skeleton
 install -m 755 -d                               "${ROOTFS_DIR}/etc/skel/"
-install -m 644 files/skel/.face                 "${ROOTFS_DIR}/etc/skel/"
-install -m 644 files/skel/.face.icon            "${ROOTFS_DIR}/etc/skel/"
+ln -sf /usr/share/kosmos/face.icon "${ROOTFS_DIR}/etc/skel/.face.icon"
+ln -sf /usr/share/kosmos/face.icon "${ROOTFS_DIR}/etc/skel/.face"

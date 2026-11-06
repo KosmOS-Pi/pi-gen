@@ -22,10 +22,6 @@ echo "Last tweaks..."
 systemctl enable vncserver-x11-serviced.service
 systemctl set-default graphical.target
 
-# Copy avatar to sddm system folder
-MYUSER=$( getent passwd 1000 | cut -d: -f1 )
-cp /home/$MYUSER/.face.icon /usr/share/sddm/faces/$MYUSER.face.icon
-
 # Disable setup service and remove it
 systemctl disable kosmos-setup.service
 rm -f /etc/systemd/system/kosmos-setup.service 2> /dev/null || true
