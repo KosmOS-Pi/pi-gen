@@ -17,8 +17,7 @@ log() {
 }
 
 check_network() {
-	nm-online -x -q -t 15
-	if [ $? -ne 0 ]; then
+	if ! nm-online -x -q -t 15; then
 		log "NetworkManager reports no active connection."
 		return 1
 	fi
