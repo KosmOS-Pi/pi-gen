@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -e
+
 # Install SelfHotspost
 install -m 755 -d                               "${ROOTFS_DIR}/etc/NetworkManager/system-connections/"
 install -m 600 files/SelfHotspot.nmconnection   "${ROOTFS_DIR}/etc/NetworkManager/system-connections/"
