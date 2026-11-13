@@ -13,7 +13,9 @@ mkdir -p $FLAG_DIR
 log() {
 	local msg="[KosmOS setup] $*"
 	echo $msg
-	[ -w "$TTY" ] && echo "$msg" > $TTY
+	if [ -w "$TTY" ]; then
+	  echo "$msg" > $TTY
+	fi
 }
 
 check_network() {

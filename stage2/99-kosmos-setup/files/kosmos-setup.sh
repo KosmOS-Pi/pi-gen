@@ -9,7 +9,9 @@ DONE_FILE="$FLAG_DIR/done"
 echo "Installing packages..."
 # Update repositories, upgrade and install packages
 apt-get update
-apt-get -y upgrade
+DEBIAN_FRONTEND=noninteractive apt-get -yq \
+  -o Dpkg::Options::="--force-confold" \
+  upgrade
 
 DEBIAN_FRONTEND=noninteractive apt-get -yq \
   -o Dpkg::Options::="--force-confdef" \

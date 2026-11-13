@@ -34,10 +34,16 @@ install -m 755 files/kosmos-setup-status.sh     "${ROOTFS_DIR}/etc/profile.d"
 install -m 755 -d                               "${ROOTFS_DIR}/usr/share/keyrings/"
 install -m 755 -d                               "${ROOTFS_DIR}/etc/apt/sources.list.d/"
 
+# Check keys fingerprint
+EXPECTED=$(tr -d '[:space:]' < "files/kosmos-archive-keyring.fpr")
+ACTUAL=$(gpg --show-keys --with-colons "files//kosmos-bootstrap.pgp" \
+    | awk -F: '$1=="fpr"{print $10; exit}')
+[ -n "$EXPECTED" ] && [ "$EXPECTED" = "$ACTUAL" ] || { echo "Keyring fingerprint mismatch"; exit 1; }
+
 install -m 644 files/kosmos-bootstrap.pgp       "${ROOTFS_DIR}/usr/share/keyrings/"
 install -m 644 files/kosmos-bootstrap.sources    "${ROOTFS_DIR}/etc/apt/sources.list.d/"
 
-chroot "${ROOTFS_DIR}" /bin/bash -c 'apt update && apt install -y kosmos-archive-keyring kosmos-apt-config'
+chroot "${ROOTFS_DIR}" /bin/bash -c 'apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yq kosmos-archive-keyring kosmos-apt-config'
 
 rm "${ROOTFS_DIR}/usr/share/keyrings/kosmos-bootstrap.pgp"
 rm "${ROOTFS_DIR}/etc/apt/sources.list.d/kosmos-bootstrap.sources"
